@@ -1,48 +1,33 @@
-name: Run tests
+name: Release
 
 on:
+  pull_request:
+    branches:
+      - master
   push:
-  schedule:
-    - cron: '0 0 * * *'
+    branches:
+      - master
+      - beta
 
 jobs:
-  php-tests:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        php: [7.4, 7.3, 7.2]
-        laravel: [7.*, 6.*]
-        dependency-version: [prefer-lowest, prefer-stable]
-        os: [ubuntu-latest, windows-latest]
-        include:
-          - laravel: 8.*
-            testbench: 6.*
-          - laravel: 7.*
-            testbench: 5.*
-          - laravel: 6.*
-            testbench: 4.*
-        exclude:
-          - laravel: 8.*
-            php: 7.2
-
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
-
+  release:
+    name: release
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
+      - name: Checkout
+        uses: actions/checkout@v2
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v1
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v2
+        id: semantic
         with:
-          php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
-          coverage: none
-
-      - name: Install dependencies
-        run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
-
-      - name: Execute tests
-        run: ./vendor/bin/phpunit
+          extra_plugins: |
+            @semantic-release/commit-analyzer
+            @semantic-release/git
+            @semantic-release/changelog
+            semantic-release-slack-bot
+            @semantic-release/exec
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SEMANTIC_RELEASE_PACKAGE: ${{ secrets.SEMANTIC_RELEASE_PACKAGE }}
