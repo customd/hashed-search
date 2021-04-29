@@ -1,0 +1,52 @@
+{
+  "name": "custom-d/hashed-search",
+  "description": "A hashed search package for adding a searchable hash to your encrypted database columns",
+  "license": "MIT",
+  "keywords": [
+    "hashed",
+    "search"
+  ],
+  "type": "library",
+  "authors": [
+    {
+      "name": "Craig Smith",
+      "email": "craig.smith@customd.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.2",
+    "illuminate/support": "^6.0|^7.0|^8.0"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^4.0|^5.0|^6.0",
+    "phpunit/phpunit": "^8.4|^9.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "CustomD\\HashedSearch\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "CustomD\\HashedSearch\\Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "phpunit": "phpunit"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "CustomD\\HashedSearch\\ServiceProvider"
+      ],
+      "aliases": {
+        "DatabaseHash": "CustomD\\HashedSearch\\Facades\\HashedSearch"
+      }
+    }
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  }
+}
