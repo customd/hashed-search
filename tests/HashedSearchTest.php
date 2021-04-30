@@ -20,8 +20,23 @@ class HashedSearchTest extends TestCase
         ];
     }
 
-    public function testExample()
+    public function test_same_app_salt_hash(): void
     {
-        $this->assertEquals(1, 1);
+        $this->assertEquals(HashedSearch::create("random"), HashedSearch::create("Random"));
+    }
+
+    public function test_different_app_salt_hash(): void
+    {
+        $this->assertNotEquals(HashedSearch::create("random"), HashedSearch::setSalt("this is a new salt")->create("random"));
+    }
+
+    public function test_different_value(): void
+    {
+        $this->assertNotEquals(HashedSearch::create("random"), HashedSearch::create("randon"));
+    }
+
+    public function test_different_salt_modifier(): void
+    {
+        $this->assertNotEquals(HashedSearch::create("random", 'funny'), HashedSearch::create("Random"));
     }
 }

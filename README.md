@@ -1,8 +1,8 @@
-# Hashed Search
+# Laravel Hashed Search
 
-[![GitHub Workflow Status](https://github.com/custom-d/hashed-search/workflows/Run%20tests/badge.svg)](https://github.com/custom-d/hashed-search/actions)
-[![Packagist](https://img.shields.io/packagist/v/custom-d/hashed-search.svg)](https://packagist.org/packages/custom-d/hashed-search)
-[![Packagist](https://img.shields.io/packagist/l/custom-d/hashed-search.svg)](https://packagist.org/packages/custom-d/hashed-search)
+[![GitHub Workflow Status](https://github.com/custom-d/hashed-search/workflows/Run%20tests/badge.svg)](https://github.com/customd/hashed-search/actions)
+[![Packagist](https://img.shields.io/packagist/v/custom-d/hashed-search.svg)](https://packagist.org/packages/customd/hashed-search)
+[![Packagist](https://img.shields.io/packagist/l/custom-d/hashed-search.svg)](https://packagist.org/packages/customd/hashed-search)
 
 Package description: Package to allow hashing of encrypted data for searching
 
@@ -21,6 +21,8 @@ php artisan vendor:publish --provider="CustomD\HashedSearch\ServiceProvider"
 ```
 
 ## Usage
+
+### Eloqent Models
 
 In your model add the `use CustomD\HashedSearch\Contracts\HasSearchableHash;` trait and add a new property `protected $searchableHash = ['bank_name'];`
 
@@ -54,6 +56,23 @@ To search:
 EncryptdModel::searchHashedField('encryp_column_1','clear text here');
 ```
 
+### Manual usage
+
+You can manually has items by running the follwing code:
+
+```php
+\CustomD\HashedSearch\Facades\HashedSearch::create('string to hash');
+```
+
+## Methods
+
+the `\CustomD\HashedSearch\Facades\HashedSearch` Class has the following methods
+
+- create(string $value, string $saltModifier = "" ): ?string
+- setSalt(string salt): SELF
+- setTransliterator(string rule): SELF
+- setHashes(?string $cypherA = null, ?string $cypherB = null): SELF
+
 ## Security
 
 An important consideration in searchable encryption is leakage, which is information an attacker can gain. Blind indexing leaks that rows have the same value. If you use this for a field like last name, an attacker can use frequency analysis to predict the values. In an active attack where an attacker can control the input values, they can learn which other values in the database match.
@@ -62,5 +81,5 @@ Here’s a [great article](https://blog.cryptographyengineering.com/2019/02/11/a
 
 ## Credits
 
-- [Custom D](https://github.com/custom-d/hashed-search)
-- [All contributors](https://github.com/custom-d/hashed-search/graphs/contributors)
+- [Custom D](https://github.com/customd)
+- [All contributors](https://github.com/customd/hashed-search/graphs/contributors)
