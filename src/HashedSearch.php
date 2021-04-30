@@ -18,28 +18,28 @@ class HashedSearch
 
     public function __construct(array $config)
     {
-        $this->setUpSalt($config['salt'] ?? null);
-        $this->setupTransliterator($config['transliterator_rule'] ?? null);
-        $this->setupHashes($config['cypher_a'], $config['cypher_b']);
+        $this->setSalt($config['salt'] ?? null)
+        ->setTransliterator($config['transliterator_rule'] ?? null)
+        ->setHashes($config['cypher_a'], $config['cypher_b']);
     }
 
 
-    public function create(?string $value, string $salt_modifier = ""): ?string
+    public function create(string $value, string $saltModifier = ""): ?string
     {
         //Nothing to hash here!
         if (strlen($value) === 0 || $value === null) {
             return null;
         }
 
-        $prepared_value = strtolower($this->transliterator->transliterate($value));
+        $preparedValue = strtolower($this->transliterator->transliterate($value));
 
-        return bin2hex(hash($this->cypherA, $prepared_value . $this->salt . $salt_modifier, true) ^ hash($this->cypherB, $salt_modifier . $this->salt . $prepared_value, true));
+        return bin2hex(hash($this->cypherA, $preparedValue . $this->salt . $saltModifier, true) ^ hash($this->cypherB, $saltModifier . $this->salt . $preparedValue, true));
     }
 
 
-    private function setUpSalt(?string $salt): void
+    public function setSalt(string $salt): self
     {
-        throw_if(strlen($salt) === 0 or $salt === null, RuntimeException::class, 'No hashing salt has been specified.');
+        throw_if(empty($salt), RuntimeException::class, 'No hashing salt has been specified.');
 
         // If the salt starts with "base64:", we will need to decode it before using it
         if (Str::startsWith($salt, 'base64:')) {
@@ -47,17 +47,26 @@ class HashedSearch
         }
 
         $this->salt = $salt;
+
+        return $this;
     }
 
-    private function setupTransliterator(?string $rule): void
+    public function setTransliterator(string $rule): self
     {
-        throw_if(strlen($rule) === 0 or $rule === null, RuntimeException::class, 'No hashing salt has been specified.');
+        throw_if(empty($rule), RuntimeException::class, 'No hashing salt has been specified.');
         $this->transliterator  = Transliterator::createFromRules($rule, Transliterator::FORWARD);
+
+        return $this;
     }
 
-    private function setupHashes(?string $cypherA, ?string $cypherB)
+    public function setHashes(?string $cypherA = null, ?string $cypherB = null): self
     {
-        $this->cypherA = $cypherA ?? 'sha512';
-        $this->cypherB = $cypherB ?? 'whirlpool';
+        $this->cypherA = $cypherA ?? $this->cypherA ?? 'sha512';
+        $this->cypherB = $cypherB ?? $this->cypherB ?? 'whirlpool';
+
+        throw_if(strlen($this->cypherA) === 0 or $this->cypherA  === null, RuntimeException::class, 'No primary hash has been specified.');
+        throw_if(strlen($this->cypherB) === 0 or $this->cypherB  === null, RuntimeException::class, 'No secondary hash has been specified.');
+
+        return $this;
     }
 }

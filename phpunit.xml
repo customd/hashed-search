@@ -13,6 +13,10 @@
       <directory suffix="Test.php">tests</directory>
     </testsuite>
   </testsuites>
+   <php>
+    <env name="DB_CONNECTION" value=":memory:"/>
+    <env name="APP_KEY" value="base64:2fl+Ktvkfl+Fuz4Qp/A75G2RTiWVA/ZoKZvp6fiiM10="/>
+  </php>
   <filter>
     <whitelist processUncoveredFilesFromWhitelist="true">
       <directory suffix=".php">src</directory>
