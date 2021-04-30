@@ -1,8 +1,9 @@
 # Laravel Hashed Search
 
-[![GitHub Workflow Status](https://github.com/custom-d/hashed-search/workflows/Run%20tests/badge.svg)](https://github.com/customd/hashed-search/actions)
+[![PHP Composer](https://github.com/customd/hashed-search/actions/workflows/php.yml/badge.svg)](https://github.com/customd/hashed-search/actions/workflows/php.yml)
 [![Packagist](https://img.shields.io/packagist/v/custom-d/hashed-search.svg)](https://packagist.org/packages/customd/hashed-search)
 [![Packagist](https://img.shields.io/packagist/l/custom-d/hashed-search.svg)](https://packagist.org/packages/customd/hashed-search)
+[![Release](https://github.com/customd/hashed-search/actions/workflows/default.yml/badge.svg)](https://github.com/customd/hashed-search/actions/workflows/default.yml)
 
 Package description: Package to allow hashing of encrypted data for searching
 
