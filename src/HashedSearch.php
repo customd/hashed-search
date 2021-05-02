@@ -12,6 +12,8 @@ class HashedSearch
     private $salt;
     private $cypherA;
     private $cypherB;
+    private $iterationCount;
+    private $trimEnabled;
 
     private \Transliterator $transliterator;
 
@@ -20,7 +22,9 @@ class HashedSearch
     {
         $this->setSalt($config['salt'] ?? null)
         ->setTransliterator($config['transliterator_rule'] ?? null)
-        ->setHashes($config['cypher_a'], $config['cypher_b']);
+        ->setHashes($config['cypher_a'], $config['cypher_b'])
+        ->setIterationCount($config['iteration_count'])
+        ->setTrimEnabled($config['trim_hash']);
     }
 
 
@@ -33,7 +37,20 @@ class HashedSearch
 
         $preparedValue = strtolower($this->transliterator->transliterate($value));
 
-        return bin2hex(hash($this->cypherA, $preparedValue . $this->salt . $saltModifier, true) ^ hash($this->cypherB, $saltModifier . $this->salt . $preparedValue, true));
+        return $this->iterationCount === null ?
+        $this->trimIfRequired(
+            bin2hex(hash($this->cypherA, $preparedValue . $this->salt . $saltModifier, true) ^ hash($this->cypherB, $saltModifier . $this->salt . $preparedValue, true))
+        )
+        :
+        $this->trimIfRequired(
+            hash_pbkdf2($this->cypherA, $preparedValue, $this->salt . $saltModifier, $this->iterationCount, 32)
+        );
+    }
+
+
+    protected function trimIfRequired($hash)
+    {
+        return $this->trimEnabled ? substr($hash, 0, 100) : $hash;
     }
 
 
@@ -53,7 +70,8 @@ class HashedSearch
 
     public function setTransliterator(string $rule): self
     {
-        throw_if(empty($rule), RuntimeException::class, 'No hashing salt has been specified.');
+
+        throw_if(empty($rule), RuntimeException::class, 'No transliterator rule has been specified.');
         $this->transliterator  = Transliterator::createFromRules($rule, Transliterator::FORWARD);
 
         return $this;
@@ -67,6 +85,18 @@ class HashedSearch
         throw_if(strlen($this->cypherA) === 0 or $this->cypherA  === null, RuntimeException::class, 'No primary hash has been specified.');
         throw_if(strlen($this->cypherB) === 0 or $this->cypherB  === null, RuntimeException::class, 'No secondary hash has been specified.');
 
+        return $this;
+    }
+
+    public function setIterationCount(?int $count): self
+    {
+        $this->iterationCount = $count;
+        return $this;
+    }
+
+    public function setTrimEnabled(bool $enabled): self
+    {
+        $this->trimEnabled = $enabled;
         return $this;
     }
 }
