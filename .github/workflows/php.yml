@@ -32,5 +32,14 @@ jobs:
     - name: Run test suite
       run: composer run-script phpunit
 
-    - name: Psalm - Code quality tool for PHP
-      uses: mickaelandrieu/psalm-ga@latest
+    - name: Psalm – Static Analysis for PHP
+      # You may pin to the exact commit or the version.
+      # uses: psalm/psalm-github-actions@2e545d38ff4387b370449e2673088cc8dc40cf1d
+      uses: psalm/psalm-github-actions@1.1.2
+      with:
+        security_analysis: true
+        report_file: results.sarif
+    - name: Upload Security Analysis results to GitHub
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: results.sarif
