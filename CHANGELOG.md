@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/customd/hashed-search/compare/v1.0.1...v1.1.0) (2021-05-04)
+
+
+### Features
+
+* Enhanced encryption ruleset ([06619bf](https://github.com/customd/hashed-search/commit/06619bf5037bb2a5e9a05d9c9f12d58599a0a327))
+
 ## [1.0.1](https://github.com/customd/hashed-search/compare/v1.0.0...v1.0.1) (2021-04-30)
 
 
