@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/customd/hashed-search/compare/v1.1.0...v1.2.0) (2022-05-31)
+
+
+### Features
+
+* laravel 9 ([5569ddc](https://github.com/customd/hashed-search/commit/5569ddc55c148c632947960ee6744e0521c66905))
+
 # [1.1.0](https://github.com/customd/hashed-search/compare/v1.0.1...v1.1.0) (2021-05-04)
 
 
