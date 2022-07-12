@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/customd/hashed-search/compare/v1.2.1...v1.2.2) (2022-07-12)
+
+
+### Bug Fixes
+
+* nullable searchable values ([87d8062](https://github.com/customd/hashed-search/commit/87d8062d8012837196877b25356b91db00c7eaf5))
+
 ## [1.2.1](https://github.com/customd/hashed-search/compare/v1.2.0...v1.2.1) (2022-06-16)
 
 
