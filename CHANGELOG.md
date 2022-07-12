@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/customd/hashed-search/compare/v1.2.2...v1.2.3) (2022-07-12)
+
+
+### Bug Fixes
+
+* filter null values before creating hashes ([79169a6](https://github.com/customd/hashed-search/commit/79169a6490266cbd2e558c453cf1f5ce5d208b14))
+
 ## [1.2.2](https://github.com/customd/hashed-search/compare/v1.2.1...v1.2.2) (2022-07-12)
 
 
