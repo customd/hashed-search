@@ -31,7 +31,7 @@ trait HasSearchableHash
     protected function generateSearchHashes(): Collection
     {
         return collect($this->searchableHash ?? [])->filter()->mapWithKeys(function ($field) {
-            return [$field => HashedSearch::create($this->getAttribute($field))];
+            return [$field => HashedSearch::create($this->getAttribute($field) ?? '')];
         });
     }
 
