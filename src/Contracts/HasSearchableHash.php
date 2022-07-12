@@ -30,9 +30,13 @@ trait HasSearchableHash
 
     protected function generateSearchHashes(): Collection
     {
-        return collect($this->searchableHash ?? [])->filter()->mapWithKeys(function ($field) {
-            return [$field => HashedSearch::create($this->getAttribute($field) ?? '')];
-        });
+        return collect($this->searchableHash ?? [])
+            ->filter(
+                fn($field) => ! blank($this->getAttribute($field))
+            )
+            ->mapWithKeys(
+                fn ($field) => [$field => HashedSearch::create($this->getAttribute($field))]
+            );
     }
 
     public function scopeSearchHashedField(Builder $builder, string $field, string $clearText)
