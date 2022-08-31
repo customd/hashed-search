@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/customd/hashed-search/compare/v1.2.3...v1.2.4) (2022-08-31)
+
+
+### Bug Fixes
+
+* add or where search ([5ab83c6](https://github.com/customd/hashed-search/commit/5ab83c6e56a38aee1586ea6092998a759e23e402))
+
 ## [1.2.3](https://github.com/customd/hashed-search/compare/v1.2.2...v1.2.3) (2022-07-12)
 
 
