@@ -39,9 +39,20 @@ trait HasSearchableHash
             );
     }
 
-    public function scopeSearchHashedField(Builder $builder, string $field, string $clearText)
+    public function scopeSearchHashedField(Builder $builder, string $field, string $clearText): void
     {
         $builder->whereHas('searchHashRelation', function (Builder $builder) use ($field, $clearText) {
+            $builder->where('hash_field', $field);
+            $builder->where(
+                'hash',
+                HashedSearch::create($clearText)
+            );
+        });
+    }
+
+    public function scopeOrSearchHashedField(Builder $builder, string $field, string $clearText): void
+    {
+        $builder->orWhereHas('searchHashRelation', function (Builder $builder) use ($field, $clearText) {
             $builder->where('hash_field', $field);
             $builder->where(
                 'hash',
