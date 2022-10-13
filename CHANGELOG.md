@@ -1,3 +1,10 @@
+## [1.2.5](https://github.com/customd/hashed-search/compare/v1.2.4...v1.2.5) (2022-10-13)
+
+
+### Bug Fixes
+
+* add ability to forcebly hash a record ([4cdd650](https://github.com/customd/hashed-search/commit/4cdd65080f9332be1cefa9cf3470cee28f2da11a))
+
 ## [1.2.4](https://github.com/customd/hashed-search/compare/v1.2.3...v1.2.4) (2022-08-31)
 
 
