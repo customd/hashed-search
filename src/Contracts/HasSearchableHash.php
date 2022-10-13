@@ -16,15 +16,20 @@ trait HasSearchableHash
     {
         //We need to setup hashes for this
         static::saved(function ($model) {
-            $model->generateSearchHashes()->each(function ($hash, $field) use ($model) {
-                ModelsHashedSearch::updateOrCreate([
-                    'hash_field' => $field,
-                    'hash_id'    => $model->getKey(),
-                    'hash_type'  => $model->getMorphClass()
-                ], [
-                    'hash'       => $hash,
-                ]);
-            });
+            $model->buildSearchHash()
+        });
+    }
+
+    public function buildSearchHash(): void
+    {
+        $this->generateSearchHashes()->each(function ($hash, $field) {
+            ModelsHashedSearch::updateOrCreate([
+                'hash_field' => $field,
+                'hash_id'    => $this->getKey(),
+                'hash_type'  => $this->getMorphClass()
+            ], [
+                'hash'       => $hash,
+            ]);
         });
     }
 
