@@ -16,7 +16,7 @@ trait HasSearchableHash
     {
         //We need to setup hashes for this
         static::saved(function ($model) {
-            $model->buildSearchHash()
+            $model->buildSearchHash();
         });
     }
 
