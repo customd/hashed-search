@@ -1,3 +1,10 @@
+## [1.2.6](https://github.com/customd/hashed-search/compare/v1.2.5...v1.2.6) (2022-11-08)
+
+
+### Bug Fixes
+
+* missing ; in contract ([a6ecf6a](https://github.com/customd/hashed-search/commit/a6ecf6ab16f9e03dce4e615ce166be8e334ac7d4))
+
 ## [1.2.5](https://github.com/customd/hashed-search/compare/v1.2.4...v1.2.5) (2022-10-13)
 
 
