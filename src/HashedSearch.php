@@ -28,7 +28,7 @@ class HashedSearch
     }
 
 
-    public function create(string $value, string $saltModifier = ""): ?string
+    public function create(?string $value, string $saltModifier = ""): ?string
     {
         //Nothing to hash here!
         if (strlen($value) === 0 || $value === null) {
