@@ -4,6 +4,7 @@ include:
     ref: release/2.x
 
 variables:
+    SEMANTIC_RELEASE_PACKAGE: "Laravel Hashed Search for Encrypted Fields"
     PHP_COVERAGE_ENABLED: "false"
     PHP_STAN_ENABLED: "false"
     RECTOR_CODE_REVIEW: "false"
