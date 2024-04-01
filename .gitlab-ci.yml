@@ -1,0 +1,12 @@
+include:
+  - project: "custom-d/devops-platform/ci-templates/php"
+    file: "composer-package.gitlab-ci.yml"
+    ref: release/2.x
+
+variables:
+    PHP_COVERAGE_ENABLED: "false"
+    PHP_STAN_ENABLED: "false"
+    RECTOR_CODE_REVIEW: "false"
+    TEST_PHP_8_3: "true"
+    TEST_PHP_8_2: "true"
+    TEST_PHP_8_1: "true"
