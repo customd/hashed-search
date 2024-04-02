@@ -7,7 +7,6 @@ variables:
     SEMANTIC_RELEASE_PACKAGE: "Laravel Hashed Search for Encrypted Fields"
     PHP_COVERAGE_ENABLED: "false"
     PHP_STAN_ENABLED: "false"
-    RECTOR_CODE_REVIEW: "false"
+    RECTOR_CODE_REVIEW: "true"
     TEST_PHP_8_3: "true"
     TEST_PHP_8_2: "true"
-    TEST_PHP_8_1: "true"
