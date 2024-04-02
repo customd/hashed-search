@@ -37,7 +37,7 @@ trait HasSearchableHash
     {
         return collect($this->searchableHash ?? [])
             ->filter(
-                fn($field) => ! blank($this->getAttribute($field))
+                fn($field) => filled($this->getAttribute($field))
             )
             ->mapWithKeys(
                 fn ($field) => [$field => HashedSearch::create($this->getAttribute($field))]

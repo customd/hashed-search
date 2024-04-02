@@ -3,7 +3,6 @@
 namespace CustomD\HashedSearch;
 
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Support\Facades\Config;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {

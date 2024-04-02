@@ -15,7 +15,7 @@ class HashedSearch
     private $iterationCount;
     private $trimEnabled;
 
-    private \Transliterator $transliterator;
+    private Transliterator $transliterator;
 
 
     public function __construct(array $config)
@@ -56,7 +56,7 @@ class HashedSearch
 
     public function setSalt(string $salt): self
     {
-        throw_if(empty($salt), RuntimeException::class, 'No hashing salt has been specified.');
+        throw_if(blank($salt), RuntimeException::class, 'No hashing salt has been specified.');
 
         // If the salt starts with "base64:", we will need to decode it before using it
         if (Str::startsWith($salt, 'base64:')) {
@@ -71,7 +71,7 @@ class HashedSearch
     public function setTransliterator(string $rule): self
     {
 
-        throw_if(empty($rule), RuntimeException::class, 'No transliterator rule has been specified.');
+        throw_if(blank($rule), RuntimeException::class, 'No transliterator rule has been specified.');
         $this->transliterator  = Transliterator::createFromRules($rule, Transliterator::FORWARD);
 
         return $this;
