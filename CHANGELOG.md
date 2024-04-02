@@ -1,3 +1,10 @@
+# [1.4.0](https://git.customd.com/composer/hashed-search/compare/v1.3.0...v1.4.0) (2024-04-02)
+
+
+### Features
+
+* dropped larave 8&9 and added 11 support ([53792cf](https://git.customd.com/composer/hashed-search/commit/53792cf82a1a9de2401df494cfad16524259d1c9))
+
 ## [1.2.6](https://github.com/customd/hashed-search/compare/v1.2.5...v1.2.6) (2022-11-08)
 
 
