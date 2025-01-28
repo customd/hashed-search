@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static ?string create(string $value, string $saltModifier = "" )
- * @method static SELF setSalt(string salt)
- * @method static SELF setTransliterator(string rule)
- * @method static SELF setHashes(?string $cypherA = null, ?string $cypherB = null)
+ * @method static \CustomD\HashedSearch\HashedSearch setSalt(string $salt)
+ * @method static \CustomD\HashedSearch\HashedSearch setTransliterator(string $rule)
+ * @method static \CustomD\HashedSearch\HashedSearch setHashes(?string $cypherA = null, ?string $cypherB = null)
  *
  * @see \CustomD\HashedSearch\HashedSearch
  */

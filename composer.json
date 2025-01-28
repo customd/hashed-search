@@ -20,7 +20,8 @@
   },
   "require-dev": {
     "orchestra/testbench": "^8.0|^9.0",
-    "phpunit/phpunit": "^10.0"
+    "phpunit/phpunit": "^10.0",
+    "larastan/larastan": "^2.0"
   },
   "autoload": {
     "psr-4": {
@@ -33,7 +34,8 @@
     }
   },
   "scripts": {
-    "phpunit": "phpunit"
+    "test": "phpunit",
+    "phpstan": "phpstan"
   },
   "extra": {
     "laravel": {

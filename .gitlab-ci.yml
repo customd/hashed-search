@@ -10,3 +10,4 @@ variables:
     RECTOR_CODE_REVIEW: "true"
     TEST_PHP_8_3: "true"
     TEST_PHP_8_2: "true"
+    TEST_PHP_8_4: "true"
